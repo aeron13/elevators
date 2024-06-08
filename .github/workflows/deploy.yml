@@ -37,6 +37,6 @@ jobs:
         run: npm run build
 
       - name: Deploy to GitHub Pages
-        uses: elevators/actions-gh-pages@v4.0.5
+        uses: actions/deploy-pages@v4.0.5
         with:
           publish_dir: ./dist
