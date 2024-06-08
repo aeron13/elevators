@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+      "outDir": "./dist/",
+      "noImplicitAny": true,
+      "module": "es6",
+      "lib": ["es2017", "dom"], 
+      "target": "es6",
+      "allowJs": true,
+      "moduleResolution": "node",
+      "removeComments": true,  
+      "forceConsistentCasingInFileNames": true,            /* Ensure that casing is correct in imports. */
+      "esModuleInterop": true,   
+    }
+  }
