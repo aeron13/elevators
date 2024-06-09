@@ -3,18 +3,15 @@ import { ElevatorInterface } from "./interfaces";
 
 export default class Elevator implements ElevatorInterface {
     id: number;
-    floor: number;
-    speed: number;
-    doorsOpen: boolean;
+    floor = 0;
+    speed = 500;
+    doorsOpen = true;
     element: HTMLElement;
     buttons: HTMLElement;
 
     constructor(id: number, floors: number) {
         this.id = id;
-        this.floor = 0
-        this.speed = 500
-        this.doorsOpen = false
-
+ 
         this.element = document.createElement('div')
         this.element.classList.add('elevator')
         this.element.style.left = this.id * 20 + 25 + '%'
