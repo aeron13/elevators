@@ -20,7 +20,7 @@ export default class Elevator implements ElevatorInterface {
         for (let i = 0; i <= floors; i++) {
             const clickHandler = (event: Event) => {
                 event.preventDefault()
-                if(!this.isMoving()) this.goToFloor(i)
+                if(!this.isMoving) this.goToFloor(i)
             }
             const button = new ElevatorButton(i, clickHandler)
             buttonWrapper.prepend(button.element)
