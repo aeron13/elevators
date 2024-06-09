@@ -4,8 +4,8 @@ import { ElevatorInterface } from "./interfaces";
 export default class Elevator implements ElevatorInterface {
     id: number;
     floor = 0;
-    speed = 500;
-    doorsOpen = true;
+    speed = 1000;
+    isMoving = false;
     element: HTMLElement;
     buttons: HTMLElement;
 
@@ -31,22 +31,39 @@ export default class Elevator implements ElevatorInterface {
     public goToFloor(n: number): void {
         const distance = Math.abs(n - this.floor)
         const time = this.speed * distance
+        const direction = n - this.floor > 0 ? 1 : -1;
 
         this.closeDoors()
         this.element.style.transform = `translateY(-${100*n}%)`
         this.element.style.transitionDuration = `${time}ms`
+        this.isMoving = true
 
-        this.floor = n
-        setTimeout(() => {this.openDoors()}, time)
+        this.updateFloor(distance, direction)
+    }
+
+    private updateFloor(distance: number, direction: number) {
+
+        if (distance == 0) {
+            this.openDoors()
+            this.isMoving = false
+            return
+        }
+
+        distance--
+
+        setTimeout(() => {
+            this.floor = this.floor + direction
+            console.log(this.floor)
+            this.updateFloor(distance, direction) 
+
+        }, this.speed)
     }
 
     private closeDoors() {
-        this.doorsOpen = false
         this.buttons.style.opacity = '0'
     }
 
     private openDoors() {
-        this.doorsOpen = false
         this.buttons.style.opacity = '1' 
     }
 

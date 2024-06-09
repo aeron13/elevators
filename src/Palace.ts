@@ -30,14 +30,19 @@ export default class Palace implements PalaceInterface {
  
     public callElevator(n: number) {
         // find if an elevator is already there
-        const onTheFloor = this.elevators.find(elevator => elevator.floor === n)
+        const onTheFloor = this.elevators.find(elevator => elevator.floor === n && !elevator.isMoving)
         if (onTheFloor) {
             onTheFloor.goToFloor(n)
             return
         }
-        
-        this.elevators.sort((a, b) => (Math.abs(n - a.floor)) - (Math.abs(n - b.floor)))
-        this.elevators[0].goToFloor(n)
+        const availableElevators = this.elevators.filter(el => !el.isMoving )
+        if (availableElevators.length == 0) {
+            setTimeout(() => {this.callElevator(n)}, 1000)
+            return
+        }
+
+        availableElevators.sort((a, b) => (Math.abs(n - a.floor)) - (Math.abs(n - b.floor)))
+        availableElevators[0].goToFloor(n)
     }
  
     public render() {

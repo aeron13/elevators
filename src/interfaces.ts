@@ -18,7 +18,7 @@ interface ElevatorInterface {
     element: HTMLElement
     speed: number
     buttons: HTMLElement
-    doorsOpen: boolean
+    isMoving: boolean
 }
 
 interface PalaceInterface {

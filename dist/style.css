@@ -59,5 +59,6 @@ body {
     background-color: rgb(172, 32, 32);
     bottom: 0;
     transition-property: transform;
+    transition-timing-function: linear;
   }
   
