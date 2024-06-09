@@ -11,6 +11,7 @@ export default class Floor implements FloorInterface {
    
         this.button = document.createElement('button')
         this.button.classList.add('floor-button')
+        this.button.innerText = `${this.number}`
         this.button.addEventListener('click', callElevator)
 
         this.element = document.createElement('div');

@@ -7,7 +7,7 @@ export default class Elevator implements ElevatorInterface {
     speed = 1000;
     isMoving = false;
     element: HTMLElement;
-    buttons: HTMLElement;
+    buttons: ElevatorButton[] = [];
 
     constructor(id: number, floors: number) {
         this.id = id;
@@ -16,16 +16,18 @@ export default class Elevator implements ElevatorInterface {
         this.element.classList.add('elevator')
         this.element.style.left = this.id * 20 + 25 + '%'
 
-        this.buttons = document.createElement('div')
+        const buttonWrapper = document.createElement('div')
         for (let i = 0; i <= floors; i++) {
             const clickHandler = (event: Event) => {
                 event.preventDefault()
                 this.goToFloor(i)
             }
             const button = new ElevatorButton(i, clickHandler)
-            this.buttons.prepend(button.element)
+            buttonWrapper.prepend(button.element)
+            this.buttons.push(button)
         }
-        this.element.append(this.buttons)
+        this.element.append(buttonWrapper)
+        this.updateButtons()
     }
     
     public goToFloor(n: number): void {
@@ -33,7 +35,6 @@ export default class Elevator implements ElevatorInterface {
         const time = this.speed * distance
         const direction = n - this.floor > 0 ? 1 : -1;
 
-        this.closeDoors()
         this.element.style.transform = `translateY(-${100*n}%)`
         this.element.style.transitionDuration = `${time}ms`
         this.isMoving = true
@@ -44,7 +45,6 @@ export default class Elevator implements ElevatorInterface {
     private updateFloor(distance: number, direction: number) {
 
         if (distance == 0) {
-            this.openDoors()
             this.isMoving = false
             return
         }
@@ -53,18 +53,17 @@ export default class Elevator implements ElevatorInterface {
 
         setTimeout(() => {
             this.floor = this.floor + direction
-            console.log(this.floor)
+            this.updateButtons()
             this.updateFloor(distance, direction) 
 
         }, this.speed)
     }
 
-    private closeDoors() {
-        this.buttons.style.opacity = '0'
-    }
-
-    private openDoors() {
-        this.buttons.style.opacity = '1' 
+    private updateButtons() {
+        this.buttons.forEach(btn => {
+            btn.element.style.opacity = '0.5'
+        })
+        this.buttons[this.floor].element.style.opacity = '1'
     }
 
 }

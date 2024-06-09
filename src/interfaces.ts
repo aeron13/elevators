@@ -1,5 +1,6 @@
 import Floor from "./Floor"
 import Elevator from "./Elevator"
+import ElevatorButton from "./ElevatorButton"
 
 interface FloorInterface {
     number: number
@@ -17,7 +18,7 @@ interface ElevatorInterface {
     floor: number
     element: HTMLElement
     speed: number
-    buttons: HTMLElement
+    buttons: Array<ElevatorButton>
     isMoving: boolean
 }
 
