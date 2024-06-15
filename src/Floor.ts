@@ -17,5 +17,6 @@ export default class Floor implements FloorInterface {
         this.element = document.createElement('div');
         this.element.classList.add('floor');
         this.element.append(this.button)
+        this.element.addEventListener('click', callElevator)
     }
 }
