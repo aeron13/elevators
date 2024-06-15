@@ -17,6 +17,7 @@ export default class Elevator implements ElevatorInterface {
         this.element.style.left = this.id * 20 + 25 + '%'
 
         const buttonWrapper = document.createElement('div')
+        buttonWrapper.classList.add('buttons-wrapper')
         for (let i = 0; i <= floors; i++) {
             const clickHandler = (event: Event) => {
                 event.preventDefault()

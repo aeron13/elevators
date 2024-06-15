@@ -7,9 +7,9 @@ export default class Palace implements PalaceInterface {
     floors: Floor[];
     elevators: Elevator[];
  
-    constructor() {
+    constructor(height: number) {
 
-        this.height = 4
+        this.height = height
     
         this.elevators = []
         for (let i = 0; i < 3; i++ ) {

@@ -6,7 +6,7 @@ body {
 
 
 :root {
-  --building-height: 500px;
+  --building-height: 100%;
   --floor-height: 100px;
 } 
 
@@ -21,7 +21,7 @@ body {
   
   .palace {
     position: relative;
-    height: var(--building-height);
+    height: fit-content;
     width: 400px;
     border: 10px solid white;
     background-color: #ffffff69;
@@ -54,6 +54,16 @@ body {
     transform: translate(10px, -50%);
     color: rgb(45, 45, 45);
     border: 1px solid rgb(45, 45, 45);
+  }
+
+  .elevator .buttons-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    align-items: end;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 100%;
   }
 
   .elevator-button {
